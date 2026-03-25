@@ -14,6 +14,7 @@
         'DVD Documentary': { circType: '119', prefix: 'Documentary - ', physicalLocation: '163' },
         'DVD Movie': { circType: '104', prefix: 'DVD - ', physicalLocation: '102' },
         'Large Print Fiction': { circType: '1', prefix: 'Large Print - ', physicalLocation: '131' },
+        'LFH': { circType: '1', prefix: 'Local Family History - ', physicalLocation: '130' },
         'Middle Grade (J) Biography': { circType: '111', prefix: 'Biography - ', physicalLocation: '156' },
         'Middle Grade (J) Fiction': { circType: '111', prefix: 'Middle Grade Fiction - ', physicalLocation: '127' },
         'Middle Grade (J) Graphic Novel': { circType: '111', prefix: 'Middle Grade Graphic Novel - ', physicalLocation: '129' },
