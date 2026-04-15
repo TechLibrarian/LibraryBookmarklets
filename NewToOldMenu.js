@@ -26,6 +26,21 @@
         'Youth (E) Non-Fiction': { circType: '111', prefix: 'Youth Non-Fiction - ', physicalLocation: '122' }
     };
 
+    const mgFictionGenres = [
+        { name: 'Adventure', prefix: 'Middle Grade - Adventure - ' },
+        { name: 'Animals', prefix: 'Middle Grade - Animals - ' },
+        { name: 'Classics', prefix: 'Middle Grade - Classics - ' },
+        { name: 'Entertainment', prefix: 'Middle Grade - Entertainment - ' },
+        { name: 'Fantasy', prefix: 'Middle Grade - Fantasy - ' },
+        { name: 'Historical', prefix: 'Middle Grade - Historical - ' },
+        { name: 'Mystery', prefix: 'Middle Grade - Mystery - ' },
+        { name: 'Novels In Verse', prefix: 'Middle Grade - Novels In Verse - ' },
+        { name: 'Realistic', prefix: 'Middle Grade - Realistic - ' },
+        { name: 'Scary', prefix: 'Middle Grade - Scary - ' },
+        { name: 'Sci-Fi', prefix: 'Middle Grade - Sci-Fi - ' },
+        { name: 'Sports', prefix: 'Middle Grade - Sports - ' }
+    ];
+
     function closeMenus() {
         const menus = document.querySelectorAll('div[style*="position: fixed"][style*="z-index: 10000"]');
         menus.forEach(menu => {
@@ -68,6 +83,15 @@
             alert("This webpage does not include the necessary fields! Aborting task.");
             closeMenus();
         }
+    }
+
+    function createSubMenuMiddleGradeFiction() {
+        const baseSettings = oldTypes['Middle Grade (J) Fiction'];
+        const items = mgFictionGenres.map(genre => ({
+            name: genre.name,
+            action: () => setFields({ circType: baseSettings.circType, prefix: genre.prefix, physicalLocation: baseSettings.physicalLocation })
+        }));
+        createFilterableMenu('Select Middle Grade Genre', items);
     }
 
     function createFilterableMenu(titleText, items) {
@@ -173,10 +197,17 @@
     // Launch the menu immediately upon clicking the bookmarklet
     let menuItems = [];
     Object.keys(oldTypes).forEach(typeName => {
-        menuItems.push({
-            name: typeName,
-            action: () => setFields(oldTypes[typeName])
-        });
+        if (typeName === 'Middle Grade (J) Fiction') {
+            menuItems.push({
+                name: typeName,
+                action: createSubMenuMiddleGradeFiction
+            });
+        } else {
+            menuItems.push({
+                name: typeName,
+                action: () => setFields(oldTypes[typeName])
+            });
+        }
     });
     
     // Sort alphabetically
