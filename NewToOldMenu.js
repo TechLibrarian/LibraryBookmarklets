@@ -115,17 +115,24 @@
         menu.appendChild(buttonContainer);
         
         let selectedIndex = -1;
-        const highlightColor = '#3e8e41';
+        const highlightColor = '#0b3d91';
         const normalColor = '#4CAF50';
-        
+        const highlightOutline = '3px solid #FFD700';
+
         function updateHighlight() {
             const visibleButtons = Array.from(buttonContainer.querySelectorAll('button:not([style*="display: none"])'));
             visibleButtons.forEach((btn, index) => {
                 if (index === selectedIndex) {
                     btn.style.backgroundColor = highlightColor;
+                    btn.style.outline = highlightOutline;
+                    btn.style.outlineOffset = '-3px';
+                    btn.style.fontWeight = 'bold';
                     btn.scrollIntoView({ block: 'nearest' });
                 } else {
                     btn.style.backgroundColor = normalColor;
+                    btn.style.outline = 'none';
+                    btn.style.outlineOffset = '0';
+                    btn.style.fontWeight = 'normal';
                 }
             });
         }
@@ -150,14 +157,18 @@
         searchInput.focus();
         
         searchInput.addEventListener('input', () => {
-            const filterValue = searchInput.value.toLowerCase();
+            const filterValue = searchInput.value.toLowerCase().trim();
+            const tokens = filterValue.length === 0 ? [] : filterValue.split(/\s+/);
             const buttons = buttonContainer.querySelectorAll('button');
             buttons.forEach(btn => {
                 const btnText = btn.textContent.toLowerCase();
-                const words = btnText.split(/\W+/);
-                const isMatch = words.some(word => word.startsWith(filterValue));
+                const words = btnText.split(/\W+/).filter(w => w.length > 0);
+                const isMatch = tokens.length === 0 || tokens.every(token => words.some(word => word.startsWith(token)));
                 btn.style.display = isMatch ? 'block' : 'none';
                 btn.style.backgroundColor = normalColor;
+                btn.style.outline = 'none';
+                btn.style.outlineOffset = '0';
+                btn.style.fontWeight = 'normal';
             });
             selectedIndex = -1;
         });
