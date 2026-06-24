@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Sovereign Reset — Neuroplasticity Guide</title>
+  <style>
+    /* ── Reset & Base ────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --bg:         #f7f8fa;
+      --surface:    #ffffff;
+      --border:     #e4e7ed;
+      --text:       #111827;
+      --muted:      #6b7280;
+      --light:      #9ca3af;
+
+      --purple:     #6d28d9;
+      --purple-bg:  #ede9fe;
+      --teal:       #0d9488;
+      --teal-bg:    #ccfbf1;
+      --blue:       #2563eb;
+      --blue-bg:    #dbeafe;
+      --indigo:     #4338ca;
+      --indigo-bg:  #e0e7ff;
+      --amber:      #d97706;
+      --amber-bg:   #fef3c7;
+      --green:      #059669;
+      --green-bg:   #d1fae5;
+      --slate:      #475569;
+      --slate-bg:   #f1f5f9;
+      --red:        #dc2626;
+
+      --sidebar-w:  256px;
+      --r:          10px;
+      --r-sm:       6px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── Sidebar ─────────────────────────────────────────────────── */
+    .sidebar {
+      position: fixed;
+      inset: 0 auto 0 0;
+      width: var(--sidebar-w);
+      background: #0f172a;
+      color: #e2e8f0;
+      overflow-y: auto;
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 32px;
+    }
+    .sidebar::-webkit-scrollbar { width: 3px; }
+    .sidebar::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+
+    .sb-brand {
+      padding: 24px 20px 18px;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+    .sb-brand h2 { font-size: 14px; font-weight: 700; color: #fff; letter-spacing: -.2px; }
+    .sb-brand p  { font-size: 11px; color: #475569; margin-top: 2px; }
+
+    .sb-label {
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.2px; color: #334155;
+      padding: 18px 20px 6px;
+    }
+    .sb-link {
+      display: flex; align-items: center; gap: 10px;
+      padding: 7px 20px; font-size: 12.5px; color: #94a3b8;
+      text-decoration: none; border-left: 2px solid transparent;
+      transition: color .15s, background .15s, border-color .15s;
+    }
+    .sb-link:hover { color: #fff; background: rgba(255,255,255,.04); }
+    .sb-link.active { color: #fff; border-left-color: var(--dot); background: rgba(255,255,255,.05); }
+    .sb-dot {
+      width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+      background: var(--dot, #7c3aed);
+    }
+
+    /* ── Main ────────────────────────────────────────────────────── */
+    .main { margin-left: var(--sidebar-w); }
+
+    /* ── Hero ────────────────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(140deg, #0f172a 0%, #1e1b4b 60%, #0c1a2e 100%);
+      color: #fff; padding: 72px 56px 64px; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -60%; right: -10%;
+      width: 560px; height: 560px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(109,40,217,.18) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: ''; position: absolute; bottom: -40%; left: 5%;
+      width: 380px; height: 380px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(13,148,136,.12) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-tag {
+      display: inline-block; font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1.5px;
+      background: rgba(109,40,217,.3); border: 1px solid rgba(109,40,217,.5);
+      color: #c4b5fd; padding: 5px 13px; border-radius: 100px; margin-bottom: 22px;
+    }
+    .hero h1 {
+      font-size: 44px; font-weight: 800; letter-spacing: -1.5px;
+      line-height: 1.08; margin-bottom: 18px; max-width: 640px;
+    }
+    .hero h1 span {
+      background: linear-gradient(120deg, #c4b5fd 0%, #7dd3fc 55%, #6ee7b7 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-sub {
+      font-size: 16px; color: #94a3b8; max-width: 540px; line-height: 1.75; margin-bottom: 40px;
+    }
+    .hero-pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; max-width: 820px; }
+    .hero-pill {
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.09);
+      border-radius: var(--r); padding: 18px 18px 16px;
+    }
+    .hero-pill-label {
+      font-size: 10px; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 1.2px; color: #7c3aed; margin-bottom: 7px;
+    }
+    .hero-pill p { font-size: 13px; color: #94a3b8; line-height: 1.6; }
+
+    /* ── Section ─────────────────────────────────────────────────── */
+    .section { padding: 60px 56px; border-bottom: 1px solid var(--border); }
+    .section:last-child { border-bottom: none; }
+    .section.alt { background: #fff; }
+
+    .sec-head { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 36px; }
+    .sec-icon {
+      width: 46px; height: 46px; border-radius: var(--r);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; flex-shrink: 0;
+    }
+    .sec-title h2 { font-size: 24px; font-weight: 700; letter-spacing: -.4px; margin-bottom: 5px; }
+    .sec-title p  { font-size: 14px; color: var(--muted); max-width: 580px; line-height: 1.65; }
+
+    /* ── Cards ───────────────────────────────────────────────────── */
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 26px;
+    }
+    .card-head { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
+    .badge {
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .6px; padding: 3px 10px; border-radius: 100px;
+    }
+    .card-title { font-size: 17px; font-weight: 700; flex: 1; }
+    .card-meta  { font-size: 12px; color: var(--light); }
+
+    /* ── Grids ───────────────────────────────────────────────────── */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+
+    /* ── Steps (protocol) ────────────────────────────────────────── */
+    .steps { display: flex; flex-direction: column; gap: 14px; }
+    .step { display: flex; gap: 14px; align-items: flex-start; }
+    .step-n {
+      width: 27px; height: 27px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+    }
+    .step-body h4 { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+    .step-body p  { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* ── Neuro Target Tag ────────────────────────────────────────── */
+    .ntag {
+      display: flex; gap: 8px; align-items: flex-start;
+      padding: 11px 14px; border-radius: var(--r-sm);
+      font-size: 12.5px; margin-top: 18px; line-height: 1.5;
+    }
+    .ntag strong { white-space: nowrap; font-size: 11px; font-weight: 800;
+      text-transform: uppercase; letter-spacing: .6px; margin-top: 1px; }
+
+    /* ── Info Boxes ──────────────────────────────────────────────── */
+    .info {
+      border-radius: var(--r-sm); padding: 16px 18px;
+      border-left: 4px solid; margin: 16px 0;
+    }
+    .info h4 { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+    .info p, .info ul { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .info ul { padding-left: 16px; }
+    .info li { margin-bottom: 3px; }
+
+    .warn {
+      background: #fffbeb; border: 1px solid #fde68a; border-left: 4px solid #f59e0b;
+      border-radius: var(--r-sm); padding: 12px 16px;
+      font-size: 12.5px; color: #92400e; margin: 14px 0; line-height: 1.5;
+    }
+
+    /* ── Divider ─────────────────────────────────────────────────── */
+    hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+    /* ── Numbered List (ordered protocol) ───────────────────────── */
+    .olist { counter-reset: oc; list-style: none; padding: 0;
+      display: flex; flex-direction: column; gap: 9px; }
+    .olist li {
+      counter-increment: oc; display: flex; gap: 11px;
+      font-size: 13.5px; color: var(--muted); align-items: flex-start; line-height: 1.55;
+    }
+    .olist li::before {
+      content: counter(oc);
+      min-width: 22px; height: 22px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+    }
+
+    /* ── Dark Highlight Box ──────────────────────────────────────── */
+    .dark-box {
+      background: linear-gradient(135deg, #1e1b4b, #0f172a);
+      color: #fff; border-radius: var(--r); padding: 32px; margin: 24px 0;
+    }
+    .dark-box h3 { font-size: 19px; font-weight: 700; color: #c4b5fd; margin-bottom: 10px; }
+    .dark-box p  { font-size: 14px; color: #94a3b8; line-height: 1.7; }
+
+    .dark-step-row { display: flex; gap: 12px; align-items: flex-start; margin-top: 14px; }
+    .dark-step-n {
+      width: 28px; height: 28px; flex-shrink: 0;
+      border-radius: 50%;
+      background: rgba(109,40,217,.35); border: 1px solid rgba(109,40,217,.55);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; color: #c4b5fd; margin-top: 2px;
+    }
+    .dark-step-text { font-size: 14px; color: #cbd5e1; line-height: 1.6; }
+    .dark-sub {
+      margin-top: 18px; padding: 14px 16px;
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.09);
+      border-radius: var(--r-sm); font-size: 13px; color: #94a3b8; line-height: 1.6;
+    }
+
+    /* ── Tables ──────────────────────────────────────────────────── */
+    .tbl-wrap { border-radius: var(--r); overflow: hidden; border: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+    th {
+      text-align: left; padding: 11px 15px;
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .6px; background: var(--bg); color: var(--muted);
+      border-bottom: 2px solid var(--border);
+    }
+    td {
+      padding: 15px; vertical-align: top;
+      border-bottom: 1px solid var(--border); line-height: 1.6;
+    }
+    tr:last-child td { border-bottom: none; }
+    td:first-child { font-weight: 600; }
+    td small { font-size: 11.5px; font-weight: 400; color: var(--light); display: block; margin-top: 2px; }
+
+    /* ── Tag Chips ───────────────────────────────────────────────── */
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+    .chip {
+      display: inline-block; font-size: 11px; font-weight: 600;
+      padding: 3px 10px; border-radius: 100px;
+    }
+
+    /* ── Tool Cards ──────────────────────────────────────────────── */
+    .tool-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 20px;
+    }
+    .tool-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+    .tool-url { font-size: 11px; color: var(--light); font-family: monospace; margin-bottom: 10px; }
+    .tool-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* ── Summary Section ─────────────────────────────────────────── */
+    .summary-section {
+      background: #0f172a; padding: 64px 56px;
+    }
+    .summary-tag {
+      display: inline-block; font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1.5px;
+      background: rgba(109,40,217,.25); border: 1px solid rgba(109,40,217,.45);
+      color: #c4b5fd; padding: 5px 13px; border-radius: 100px; margin-bottom: 20px;
+    }
+    .summary-section h2 {
+      font-size: 30px; font-weight: 800; color: #fff;
+      letter-spacing: -.5px; margin-bottom: 10px;
+    }
+    .summary-section > p {
+      font-size: 14px; color: #475569; max-width: 560px; margin-bottom: 36px;
+    }
+
+    .pillar-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+    .pillar-card {
+      border-radius: var(--r); padding: 26px;
+      position: relative; overflow: hidden;
+    }
+    .pillar-n {
+      position: absolute; top: 14px; right: 18px;
+      font-size: 60px; font-weight: 800; line-height: 1; opacity: .08;
+    }
+    .pillar-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 16px; }
+    .pillar-list { list-style: none; padding: 0; }
+    .pillar-list li {
+      font-size: 12.5px; padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,.05);
+      display: flex; align-items: flex-start; gap: 8px; line-height: 1.5;
+    }
+    .pillar-list li:last-child { border-bottom: none; }
+    .pe { font-size: 13px; flex-shrink: 0; }
+
+    .summary-note {
+      margin-top: 36px; padding: 24px 28px;
+      background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.07);
+      border-radius: var(--r);
+    }
+    .summary-note p {
+      font-size: 14px; color: #475569; line-height: 1.85;
+      text-align: center; max-width: 720px; margin: 0 auto;
+    }
+    .summary-note strong { color: #94a3b8; }
+
+    /* ── Opposite Action Table ───────────────────────────────────── */
+    .opp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+    .opp-col { border-radius: var(--r-sm); padding: 12px 14px; }
+    .opp-col-head { font-size: 11px; font-weight: 800; text-transform: uppercase;
+      letter-spacing: .6px; margin-bottom: 8px; }
+    .opp-col p { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+    /* ── Scrollable table wrapper (mobile) ───────────────────────── */
+    .tbl-scroll { overflow-x: auto; }
+
+    /* ── Responsive ──────────────────────────────────────────────── */
+    @media (max-width: 960px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; }
+      .section { padding: 40px 22px; }
+      .hero { padding: 44px 22px 40px; }
+      .hero h1 { font-size: 30px; }
+      .hero-pillars, .grid-2, .grid-3, .pillar-grid { grid-template-columns: 1fr; }
+      .summary-section { padding: 44px 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════ SIDEBAR ══════════════════════ -->
+<aside class="sidebar">
+  <div class="sb-brand">
+    <h2>The Sovereign Reset</h2>
+    <p>Non-Pharmacological Neuroplasticity</p>
+  </div>
+
+  <span class="sb-label">Foundation</span>
+  <a href="#foundation" class="sb-link" style="--dot:#7c3aed">
+    <span class="sb-dot"></span>Brain Architecture
+  </a>
+
+  <span class="sb-label">Daily Protocols</span>
+  <a href="#morning" class="sb-link" style="--dot:#0d9488">
+    <span class="sb-dot"></span>Morning Activation
+  </a>
+  <a href="#breathwork" class="sb-link" style="--dot:#2563eb">
+    <span class="sb-dot"></span>Breathwork Methods
+  </a>
+  <a href="#evening" class="sb-link" style="--dot:#4338ca">
+    <span class="sb-dot"></span>Evening Integration
+  </a>
+
+  <span class="sb-label">Advanced Tools</span>
+  <a href="#reprogramming" class="sb-link" style="--dot:#d97706">
+    <span class="sb-dot"></span>Cognitive Reprogramming
+  </a>
+  <a href="#sensory" class="sb-link" style="--dot:#475569">
+    <span class="sb-dot"></span>Sensory Deprivation
+  </a>
+  <a href="#thermal" class="sb-link" style="--dot:#dc2626">
+    <span class="sb-dot"></span>Thermal &amp; Neurobics
+  </a>
+
+  <span class="sb-label">Biochemistry</span>
+  <a href="#diet" class="sb-link" style="--dot:#059669">
+    <span class="sb-dot"></span>Diet &amp; Metabolism
+  </a>
+  <a href="#supplements" class="sb-link" style="--dot:#10b981">
+    <span class="sb-dot"></span>Supplement Stack
+  </a>
+
+  <span class="sb-label">Enhancements</span>
+  <a href="#audio" class="sb-link" style="--dot:#7c3aed">
+    <span class="sb-dot"></span>Audio Entrainment
+  </a>
+  <a href="#summary" class="sb-link" style="--dot:#f59e0b">
+    <span class="sb-dot"></span>Full Protocol Summary
+  </a>
+</aside>
+
+<!-- ══════════════════════ MAIN ══════════════════════════ -->
+<main class="main">
+
+<!-- ▸ HERO ──────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-tag">Complete At-Home Protocol Guide</div>
+  <h1>The <span>Sovereign Reset</span></h1>
+  <p class="hero-sub">A non-pharmacological system for downregulating the Default Mode Network, softening the ego, and priming neural pathways for lasting change — built entirely for home application.</p>
+  <div class="hero-pillars">
+    <div class="hero-pill">
+      <div class="hero-pill-label">Pillar I — Biochemistry</div>
+      <p>Ketosis, fasting, HIIT, and targeted supplements to flood the brain with BDNF and neuroplastic raw materials.</p>
+    </div>
+    <div class="hero-pill">
+      <div class="hero-pill-label">Pillar II — DMN Dismantling</div>
+      <p>Sensory deprivation, thermal contrast, and breathwork to collapse the ego-enforcing Default Mode Network.</p>
+    </div>
+    <div class="hero-pill">
+      <div class="hero-pill-label">Pillar III — Reprogramming</div>
+      <p>Pattern interrupts, DBT/CBT frameworks, and theta-window techniques to inscribe new behavior into the open plasticity window.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ▸ FOUNDATION ─────────────────────────────────────────────────── -->
+<section class="section alt" id="foundation">
+  <div class="sec-head">
+    <div class="sec-icon" style="background:var(--purple-bg)">🧠</div>
+    <div class="sec-title">
+      <h2 style="color:#4c1d95">Brain Architecture: Why Patterns Get Stuck</h2>
+      <p>Understanding the neuroscience of rigidity is the prerequisite to dismantling it.</p>
+    </div>
+  </div>
+
+  <div class="grid-2" style="margin-bottom:18px">
+    <div class="card">
+      <h3 style="font-size:15px;font-weight:700;margin-bottom:10px">The Default Mode Network (DMN)</h3>
+      <p style="font-size:13.5px;color:var(--muted);line-height:1.7">The DMN governs self-referential thought, ego-construction, and mind-wandering. It actively enforces your habitual identity and behavioral paradigms, making existing patterns feel like "reality."</p>
+      <hr>
+      <p style="font-size:12.5px;color:var(--muted)"><strong>Key regions:</strong> Medial prefrontal cortex, posterior cingulate cortex</p>
+      <p style="font-size:12.5px;color:var(--muted);margin-top:6px"><strong>Goal:</strong> Downregulate the DMN to create an ego-softened plasticity window where new patterns can be inscribed.</p>
+    </div>
+    <div class="card">
+      <h3 style="font-size:15px;font-weight:700;margin-bottom:10px">The Habit Loop (Basal Ganglia)</h3>
+      <p style="font-size:13.5px;color:var(--muted);line-height:1.7">Habits are encoded subcortically as <em>cue → routine → reward</em> loops. Repeated behaviors myelinate neural pathways, making them hyper-efficient — the brain's metabolic default. This is equally true for adaptive skills and maladaptive trauma responses.</p>
+      <hr>
+      <p style="font-size:12.5px;color:var(--muted)"><strong>Hebbian principle:</strong> "Neurons that fire together, wire together." Neglected pathways weaken and dissolve via synaptic pruning. A new circuit must be repeatedly chosen under cognitive effort before it becomes dominant.</p>
+    </div>
+  </div>
+
+  <div class="info" style="background:var(--purple-bg);border-color:var(--purple)">
+    <h4 style="color:#4c1d95">The Psilocybin Benchmark — and Why It Matters</h4>
+    <p>Psilocybin achieves rapid cognitive resets by temporarily collapsing the DMN and flooding the brain with BDNF (Brain-Derived Neurotrophic Factor), opening a window of enhanced neuroplasticity. Every protocol in this guide targets the same two mechanisms through non-pharmacological means. BDNF is the master regulator of synaptic growth and the single most important biochemical target throughout this system.</p>
+  </div>
+
+  <div class="grid-2" style="margin-top:18px">
+    <div class="card">
+      <h4 style="font-size:13px;font-weight:700;margin-bottom:8px;color:var(--purple)">What Raises BDNF</h4>
+      <div class="chips">
+        <span class="chip" style="background:var(--purple-bg);color:#4c1d95">6-min HIIT</span>
+        <span class="chip" style="background:var(--purple-bg);color:#4c1d95">Intermittent Fasting</span>
+        <span class="chip" style="background:var(--purple-bg);color:#4c1d95">Sauna</span>
+        <span class="chip" style="background:var(--purple-bg);color:#4c1d95">Lion's Mane</span>
+        <span class="chip" style="background:var(--purple-bg);color:#4c1d95">Olive Oil</span>
+        <span class="chip" style="background:var(--purple-bg);color:#4c1d95">Bacopa</span>
+        <span class="chip" style="background:var(--purple-bg);color:#4c1d95">Ketones (BHB)</span>
+        <span class="chip" style="background:var(--purple-bg);color:#4c1d95">Ashwagandha</span>
+      </div>
+    </div>
+    <div class="card">
+      <h4 style="font-size:13px;font-weight:700;margin-bottom:8px;color:var(--purple)">The Two Networks to Manage</h4>
+      <p style="font-size:13px;color:var(--muted);line-height:1.65"><strong>DMN (downregulate):</strong> The self-narrative enforcer. Keeps old loops running on autopilot.</p>
+      <p style="font-size:13px;color:var(--muted);line-height:1.65;margin-top:8px"><strong>Executive Control Network (upregulate):</strong> Enables goal-directed flexibility and deliberate insertion of new behaviors. Learning to toggle between these networks consciously is the core skill of this system.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ▸ MORNING ────────────────────────────────────────────────────── -->
+<section class="section" id="morning">
+  <div class="sec-head">
+    <div class="sec-icon" style="background:var(--teal-bg)">☀️</div>
+    <div class="sec-title">
+      <h2 style="color:#134e4a">Morning Activation Protocols</h2>
+      <p>Interrupt default neural loops before the brain reinforces its daily self-narrative. Choose exactly one path upon waking.</p>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <!-- Path A -->
+    <div class="card">
+      <div class="card-head">
+        <span class="badge" style="background:var(--teal-bg);color:var(--teal)">Path A</span>
+        <span class="card-title">The Somatic Flush</span>
+        <span class="card-meta">15 min</span>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:18px">Controlled breathwork that alters blood chemistry and drops psychological defenses before cognitive patterns can re-activate.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-n" style="background:var(--teal-bg);color:var(--teal)">1</div>
+          <div class="step-body">
+            <h4>Priming Cycle</h4>
+            <p>Sit upright with unsupported spine. Take <strong>30 rapid, deep abdominal breaths</strong> — powerful mouth inhale, completely passive exhale. Continuous wave, no pauses between breaths.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n" style="background:var(--teal-bg);color:var(--teal)">2</div>
+          <div class="step-body">
+            <h4>Hypoxic Hold</h4>
+            <p>After the 30th exhale, fully empty your lungs and <strong>hold</strong>. Drop all awareness into raw bodily sensation. Hold until you feel a distinct biological urge to breathe.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n" style="background:var(--teal-bg);color:var(--teal)">3</div>
+          <div class="step-body">
+            <h4>Neuro-Saturating Inhale</h4>
+            <p>Take a maximum-capacity breath, fully expanding the chest. Hold for <strong>15 seconds</strong> while visualizing energy flooding the cortex. Release fully.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n" style="background:var(--teal-bg);color:var(--teal)">↻</div>
+          <div class="step-body">
+            <h4>Repeat for 2 total rounds</h4>
+            <p>Pair with Theta audio (4–8 Hz) for maximum entrainment effect during holds.</p>
+          </div>
+        </div>
+      </div>
+      <div class="ntag" style="background:var(--teal-bg);color:#0f766e">
+        <strong>⚡ Neuro Target</strong>
+        Mild respiratory alkalosis temporarily reduces executive DMN blood flow → transient ego-softening and heightened neural suggestibility.
+      </div>
+    </div>
+
+    <!-- Path B -->
+    <div class="card">
+      <div class="card-head">
+        <span class="badge" style="background:var(--teal-bg);color:var(--teal)">Path B</span>
+        <span class="card-title">The Awe Awakening</span>
+        <span class="card-meta">10 min</span>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:18px">A psychological intervention using vast perspective cues to trigger the "small self" phenomenon and de-center daily anxieties.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-n" style="background:var(--teal-bg);color:var(--teal)">1</div>
+          <div class="step-body">
+            <h4>Visual Scaling — 3 minutes</h4>
+            <p>Observe an open sky or horizon. If indoors, stream 4K footage of cosmic deep-fields, oceanic chasms, or aerial planetary views. Absorb the absolute scale fully and without mental commentary.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n" style="background:var(--teal-bg);color:var(--teal)">2</div>
+          <div class="step-body">
+            <h4>Conceptual Magnification</h4>
+            <p>Contemplate something beyond the brain's computation — the exact lineage of your genetic code spanning billions of years, or the physical scale of Earth spinning through a vacuum at 67,000 mph.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n" style="background:var(--teal-bg);color:var(--teal)">3</div>
+          <div class="step-body">
+            <h4>Somatic Register</h4>
+            <p>Feel the physical expansion in your chest. Notice your internal dialogue halting automatically. Lean into being completely microscopic yet entirely integrated into the grander system.</p>
+          </div>
+        </div>
+      </div>
+      <div class="ntag" style="background:var(--teal-bg);color:#0f766e">
+        <strong>⚡ Neuro Target</strong>
+        Activates the vagus nerve and shifts attention entirely outward, dissolving the rigid perceptual boundaries of personal identity.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ▸ BREATHWORK ──────────────────────────────────────────────────── -->
+<section class="section alt" id="breathwork">
+  <div class="sec-head">
+    <div class="sec-icon" style="background:var(--blue-bg)">💨</div>
+    <div class="sec-title">
+      <h2 style="color:#1e3a8a">Advanced Breathwork Modalities</h2>
+      <p>Manipulating the O₂/CO₂ ratio is a direct mechanical bridge to the autonomic nervous system and a primary tool for DMN downregulation.</p>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <!-- Wim Hof -->
+    <div class="card">
+      <div class="card-head">
+        <span class="badge" style="background:var(--blue-bg);color:var(--blue)">Method</span>
+        <span class="card-title">Wim Hof Method</span>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:16px">Cyclical controlled hyperventilation followed by breath retention. Rapidly expels CO₂, induces respiratory alkalosis, and triggers a sympathetic arousal state characterized by gamma-band EEG enhancement that forcibly interrupts negative cognitive loops.</p>
+      <ul class="olist" style="--oc-bg:var(--blue-bg);--oc-c:var(--blue)">
+        <li style="--oc-bg:var(--blue-bg)">Sit or lie down safely on a flat surface.</li>
+        <li>Take <strong>30–40 deep, forceful belly inhales</strong> with passive, unforced exhales.</li>
+        <li>On the final exhale, empty lungs fully and hold for <strong>1 to 1.5 minutes</strong>.</li>
+        <li>Take a deep recovery breath and hold for <strong>15 seconds</strong>.</li>
+        <li>Repeat the full cycle <strong>3 times</strong>.</li>
+      </ul>
+      <style>.olist li::before { background: var(--blue-bg); color: var(--blue); }</style>
+      <div class="ntag" style="background:var(--blue-bg);color:#1e3a8a;margin-top:16px">
+        <strong>⚡ Effect</strong>
+        Physiologically aroused yet internally directed cortical state. Breaks persistent negative cognitive loops via acute biological stress response.
+      </div>
+    </div>
+
+    <!-- Holotropic -->
+    <div class="card">
+      <div class="card-head">
+        <span class="badge" style="background:var(--blue-bg);color:var(--blue)">Method</span>
+        <span class="card-title">Holotropic Breathwork</span>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:14px">Developed by Dr. Stanislav Grof as a non-pharmacological analogue to high-dose psychedelic therapy. Uses <strong>continuous circular breathing</strong> — no pauses, no retention — sustained over a long duration to suppress the analytical mind through altered blood chemistry.</p>
+      <div class="info" style="background:var(--blue-bg);border-color:var(--blue)">
+        <h4 style="color:#1e3a8a">Core Technique</h4>
+        <p>Rapid deep inhale → immediate full exhale → repeat continuously. No breath holds. Typically sustained 45–90 minutes in clinical settings. Induces somatic releases, deep emotional processing, and visionary states analogous to high-dose psychedelics.</p>
+      </div>
+      <div class="info" style="background:var(--blue-bg);border-color:var(--blue)">
+        <h4 style="color:#1e3a8a">Mechanism</h4>
+        <p>Prolonged hyperventilation over time drastically alters blood chemistry, suppressing the analytical DMN. This allows the "inner healing intelligence" of the psyche to emerge from beneath analytical resistance.</p>
+      </div>
+      <div class="warn">⚠️ <strong>Requires a trained sitter.</strong> At-home sessions must use shortened durations. Can induce tetany, carpopedal spasm, and intense emotional catharsis. Not suitable for those with cardiovascular conditions or a trauma history without clinical support.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ▸ EVENING ─────────────────────────────────────────────────────── -->
+<section class="section" id="evening">
+  <div class="sec-head">
+    <div class="sec-icon" style="background:var(--indigo-bg)">🌙</div>
+    <div class="sec-title">
+      <h2 style="color:#312e81">Evening Integration Protocols</h2>
+      <p>Transition the brain from analytical processing into receptive neuroplasticity before sleep. Choose exactly one path.</p>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <!-- Metta -->
+    <div class="card">
+      <div class="card-head">
+        <span class="badge" style="background:var(--indigo-bg);color:var(--indigo)">Path A</span>
+        <span class="card-title">Compassion Architecture</span>
+        <span class="card-meta">15–20 min</span>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:18px">Directed Metta (loving-kindness) practice that actively rewires empathy circuits by systematically changing your emotional orientation toward specific categories of beings.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-n" style="background:var(--indigo-bg);color:var(--indigo)">1</div>
+          <div class="step-body">
+            <h4>Self-Stabilization</h4>
+            <p>Anchor awareness in your heart center. Slow your breath, deliberately extending exhalations to establish a physiological sense of safety before projecting outward.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n" style="background:var(--indigo-bg);color:var(--indigo)">2</div>
+          <div class="step-body">
+            <h4>Concentric Spheres — 3 min each</h4>
+            <p>Project intentions of safety, freedom, and peace to each category in sequence:</p>
+            <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px">
+              <div style="display:flex;gap:9px;align-items:center;font-size:12.5px;color:var(--muted)">
+                <span style="width:18px;height:18px;border-radius:50%;background:var(--indigo-bg);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--indigo);flex-shrink:0">1</span>
+                A deeply loved benefactor
+              </div>
+              <div style="display:flex;gap:9px;align-items:center;font-size:12.5px;color:var(--muted)">
+                <span style="width:18px;height:18px;border-radius:50%;background:var(--indigo-bg);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--indigo);flex-shrink:0">2</span>
+                A completely neutral stranger
+              </div>
+              <div style="display:flex;gap:9px;align-items:center;font-size:12.5px;color:var(--muted)">
+                <span style="width:18px;height:18px;border-radius:50%;background:var(--indigo-bg);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--indigo);flex-shrink:0">3</span>
+                A person with whom you have interpersonal conflict — do not suppress resistance, breathe into it and extend benevolence past the ego's defense
+              </div>
+              <div style="display:flex;gap:9px;align-items:center;font-size:12.5px;color:var(--muted)">
+                <span style="width:18px;height:18px;border-radius:50%;background:var(--indigo-bg);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--indigo);flex-shrink:0">4</span>
+                All sentient life globally
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ntag" style="background:var(--indigo-bg);color:#312e81">
+        <strong>⚡ Neuro Target</strong>
+        Thickens the insular cortex and temporoparietal junction (TPJ) — the biological seats of cognitive empathy. Remodels the brain's relational architecture over time.
+      </div>
+    </div>
+
+    <!-- Witness -->
+    <div class="card">
+      <div class="card-head">
+        <span class="badge" style="background:var(--indigo-bg);color:var(--indigo)">Path B</span>
+        <span class="card-title">The Witness Meditation</span>
+        <span class="card-meta">20 min</span>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:18px">Non-dual awareness practice that severs the identification between raw consciousness and the narrative "self" — the biological substrate of the ego.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-n" style="background:var(--indigo-bg);color:var(--indigo)">1</div>
+          <div class="step-body">
+            <h4>Open Focus</h4>
+            <p>Sit comfortably, eyes softly unfocused on the floor. Expand your hearing to include all ambient sounds simultaneously. Strip away all mental labeling of what you perceive.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n" style="background:var(--indigo-bg);color:var(--indigo)">2</div>
+          <div class="step-body">
+            <h4>De-Couple Thoughts</h4>
+            <p>As thoughts, memories, or narratives arise, treat them exactly like background sounds — transient energetic phenomena occurring <em>within</em> your mind, but not belonging to you and requiring no response.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n" style="background:var(--indigo-bg);color:var(--indigo)">3</div>
+          <div class="step-body">
+            <h4>Search for the Knower</h4>
+            <p>Ask inwardly: <em>"Who is observing these thoughts?"</em> Search for the physical or spatial location of the "self." Experience the vast field of open awareness that remains when no solid entity can be found.</p>
+          </div>
+        </div>
+      </div>
+      <div class="ntag" style="background:var(--indigo-bg);color:#312e81">
+        <strong>⚡ Neuro Target</strong>
+        Uncouples the medial prefrontal cortex from the posterior cingulate cortex, halting the brain's construction of the "autobiographical self."
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ▸ COGNITIVE REPROGRAMMING ────────────────────────────────────── -->
+<section class="section alt" id="reprogramming">
+  <div class="sec-head">
+    <div class="sec-icon" style="background:var(--amber-bg)">🔄</div>
+    <div class="sec-title">
+      <h2 style="color:#78350f">Cognitive Reprogramming</h2>
+      <p>Active rewriting of neural software using pattern interrupts, clinical frameworks, and deliberate identity interventions.</p>
+    </div>
+  </div>
+
+  <!-- 3-Second Protocol -->
+  <div class="dark-box">
+    <h3>The 3-Second Pattern Interrupt</h3>
+    <p>There is a critical <strong>90–200 millisecond window</strong> in which you can recognize a habitual sequence activating and redirect the neural firing before automaticity locks it in place. Use this protocol the instant an unwanted pattern triggers.</p>
+    <div class="dark-step-row">
+      <div class="dark-step-n">1</div>
+      <div class="dark-step-text">"I recognize this pattern emerging."</div>
+    </div>
+    <div class="dark-step-row">
+      <div class="dark-step-n">2</div>
+      <div class="dark-step-text">"My brain is reaching for the familiar response."</div>
+    </div>
+    <div class="dark-step-row">
+      <div class="dark-step-n">3</div>
+      <div class="dark-step-text">"I choose the neural pathway that serves my future self."</div>
+    </div>
+    <div class="dark-sub">
+      <strong style="color:#c4b5fd">Then immediately execute a physical micro-action</strong> aligned with the new behavior. Procrastinating? Open the document. Perfectionism paralysis? Write one imperfect sentence. This physicalizes the new neural track in the moment of maximum plasticity.
+    </div>
+  </div>
+
+  <div class="grid-2" style="margin-bottom:18px">
+    <!-- Flow States -->
+    <div class="card">
+      <div class="card-head">
+        <span class="badge" style="background:var(--amber-bg);color:var(--amber)">State</span>
+        <span class="card-title">Flow States</span>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:12px">Complete psychological immersion where challenge perfectly matches skill. Consistently associated with DMN downregulation, reduced amygdala activity, and the silencing of the internal critic.</p>
+      <ul style="font-size:13px;color:var(--muted);padding-left:16px;display:flex;flex-direction:column;gap:5px">
+        <li>Increases Executive Control Network activity</li>
+        <li>Suppresses anxiety via amygdala downregulation</li>
+        <li>Creates connectivity between normally anti-correlated networks</li>
+        <li>Facilitates simultaneous idea generation and goal-directed processing</li>
+      </ul>
+      <hr>
+      <p style="font-size:12px;color:var(--light)">Entry activities: complex gaming, musical improvisation, sport at skill-edge, focused creative work, coding in a challenge zone</p>
+    </div>
+
+    <!-- Identity Tools -->
+    <div class="card">
+      <div class="card-head">
+        <span class="badge" style="background:var(--amber-bg);color:var(--amber)">Tools</span>
+        <span class="card-title">Identity Interventions</span>
+      </div>
+      <div style="margin-bottom:16px">
+        <h4 style="font-size:14px;font-weight:700;margin-bottom:6px">The Mirror Clap</h4>
+        <p style="font-size:13px;color:var(--muted)">Caught in a negative internal loop? Stand at a mirror, establish deep eye contact with yourself, and <strong>clap loudly once</strong>. The acoustic shock hijacks the nervous system and terminates the loop, opening a brief suggestibility window. Immediately implant: <em>"That is the old program. I choose power now."</em></p>
+      </div>
+      <hr>
+      <div>
+        <h4 style="font-size:14px;font-weight:700;margin-bottom:6px">Theta Windows</h4>
+        <p style="font-size:13px;color:var(--muted)">The brain enters peak theta-wave suggestibility naturally <strong>upon waking and just before sleep</strong>. Pattern interrupts and new behavioral intentions planted in these windows bypass analytical resistance entirely and embed directly into subconscious architecture.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DBT + CBT -->
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-head">
+        <span class="badge" style="background:var(--amber-bg);color:var(--amber)">DBT</span>
+        <span class="card-title">Opposite Action</span>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:14px">Every emotion carries a biological "action urge." When the emotion is unhelpful to the actual situation, purposefully execute the <em>exact opposite</em> behavior and sustain it until emotional intensity measurably decreases.</p>
+      <div class="opp-grid">
+        <div class="opp-col" style="background:#fee2e2">
+          <div class="opp-col-head" style="color:#991b1b">Emotion → Urge</div>
+          <p>Fear → Avoid<br>Anger → Attack<br>Depression → Withdraw</p>
+        </div>
+        <div class="opp-col" style="background:var(--green-bg)">
+          <div class="opp-col-head" style="color:#065f46">Opposite Action</div>
+          <p>Approach the feared stimulus<br>Act gently / disengage<br>Behavioral activation — schedule activity regardless of motivation</p>
+        </div>
+      </div>
+      <div class="ntag" style="background:var(--amber-bg);color:#78350f;margin-top:14px">
+        <strong>⚡ Effect</strong>
+        Forces the brain to reconcile behavior with emotion, downregulating the emotional response to match physical reality.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <span class="badge" style="background:var(--amber-bg);color:var(--amber)">CBT</span>
+        <span class="card-title">Cognitive Restructuring</span>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:14px">Rumination — compulsive cyclical negative thinking — physically strengthens the neural circuits of depression and anxiety. Disrupt it with these techniques:</p>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;gap:10px;font-size:13px">
+          <span style="width:20px;height:20px;border-radius:4px;background:var(--amber-bg);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px">1</span>
+          <div><strong>Cognitive Defusion:</strong> <span style="color:var(--muted)">Recognize thoughts as transient neurological events, not absolute truths. Observe without attachment or judgment.</span></div>
+        </div>
+        <div style="display:flex;gap:10px;font-size:13px">
+          <span style="width:20px;height:20px;border-radius:4px;background:var(--amber-bg);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px">2</span>
+          <div><strong>Cognitive Reappraisal:</strong> <span style="color:var(--muted)">Actively challenge the accuracy of negative thoughts. Seek alternative perspectives. Redirect to actionable problem-solving steps.</span></div>
+        </div>
+        <div style="display:flex;gap:10px;font-size:13px">
+          <span style="width:20px;height:20px;border-radius:4px;background:var(--amber-bg);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px">3</span>
+          <div><strong>Time-Limit Thinking:</strong> <span style="color:var(--muted)">Set strict non-negotiable time caps on analytical reflection. Prevents productive thinking from sliding into pathological rumination loops.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ▸ SENSORY DEPRIVATION ─────────────────────────────────────────── -->
+<section class="section" id="sensory">
+  <div class="sec-head">
+    <div class="sec-icon" style="background:var(--slate-bg)">🌑</div>
+    <div class="sec-title">
+      <h2 style="color:#1e293b">Sensory Deprivation (REST)</h2>
+      <p>Restricted Environmental Stimulation Therapy eliminates external input, mimicking the DMN-decoupling effects of psychedelics by radically redirecting the brain's processing bandwidth inward.</p>
+    </div>
+  </div>
+
+  <div class="info" style="background:var(--slate-bg);border-color:var(--slate);margin-bottom:22px">
+    <h4 style="color:#1e293b">What Happens During REST</h4>
+    <p>After an initial 15–30 minutes of restlessness (the brain searching for absent stimuli), a profound stillness emerges. The brain transitions to predominant <strong>theta-wave activity</strong> — the same state as deep meditation — associated with deep suggestibility, anxiety dissolution, and enhanced neuroplasticity. Clinically confirmed in peer-reviewed trials for both protocols below.</p>
+  </div>
+
+  <div class="grid-2">
+    <!-- Hydro REST -->
+    <div class="card">
+      <div class="card-head">
+        <span class="badge" style="background:var(--slate-bg);color:var(--slate)">Protocol 1</span>
+        <span class="card-title">Hydro-REST (Float Bath)</span>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-n" style="background:var(--slate-bg);color:var(--slate)">1</div>
+          <div class="step-body">
+            <h4>Thermal Alignment</h4>
+            <p>Fill tub to exactly <strong>93.5°F–94.5°F (34.2°C–34.7°C)</strong> — the average outer skin surface temperature. Tactile receptors stop reporting boundaries; the water becomes perceptually "invisible."</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n" style="background:var(--slate-bg);color:var(--slate)">2</div>
+          <div class="step-body">
+            <h4>Mineral Saturation</h4>
+            <p>Dissolve <strong>5–10 lbs of Epsom salt</strong> (Magnesium Sulfate) into the tub. Shifts water density, eases muscle tension, and delivers transdermal magnesium to suppress nervous system hyperactivity. Use an inflatable bath pillow for neck support.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n" style="background:var(--slate-bg);color:var(--slate)">3</div>
+          <div class="step-body">
+            <h4>Sensory Extinction</h4>
+            <p>Contoured blackout eye mask. Moldable silicone earplugs. Extinguish all bathroom lighting. Place a towel under the door gap. Float for <strong>45–60 minutes</strong>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chamber REST -->
+    <div class="card">
+      <div class="card-head">
+        <span class="badge" style="background:var(--slate-bg);color:var(--slate)">Protocol 2</span>
+        <span class="card-title">Chamber-REST (Dry Void)</span>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-n" style="background:var(--slate-bg);color:var(--slate)">1</div>
+          <div class="step-body">
+            <h4>Gravity Neutralization</h4>
+            <p>Lie flat on a comfortable surface. Place a <strong>15–25 lb weighted blanket</strong> evenly over your body. Deep pressure stimulation downregulates sympathetic arousal, simulating weightlessness over time.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n" style="background:var(--slate-bg);color:var(--slate)">2</div>
+          <div class="step-body">
+            <h4>Acoustic &amp; Visual Obliteration</h4>
+            <p>Contoured sleep mask (zero eyelid pressure). Active noise-canceling headphones streaming <strong>Brown or White Noise</strong> at low volume. Do not use silence — the brain amplifies internal tinnitus in complete quiet.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-n" style="background:var(--slate-bg);color:var(--slate)">3</div>
+          <div class="step-body">
+            <h4>Somatic Immobility</h4>
+            <p>Encase arms loosely at your sides with pillows to prevent unconscious repositioning. Commit to absolute stillness for <strong>60 minutes</strong>. Let your mind drift entirely away from your physical form.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ▸ THERMAL & NEUROBICS ─────────────────────────────────────────── -->
+<section class="section alt" id="thermal">
+  <div class="sec-head">
+    <div class="sec-icon" style="background:#fee2e2">🔥</div>
+    <div class="sec-title">
+      <h2 style="color:#7f1d1d">Thermal Contrast Therapy &amp; Neurobics</h2>
+      <p>Hormetic stress cycling to spike catecholamines and BDNF, plus deliberate sensory disruption to prevent cognitive entrenchment.</p>
+    </div>
+  </div>
+
+  <div class="tbl-scroll tbl-wrap" style="margin-bottom:18px">
+    <table>
+      <thead>
+        <tr>
+          <th>Phase</th>
+          <th>Protocol</th>
+          <th>Physiological Effect</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="color:var(--red)">🔥 Hyperthermic</td>
+          <td>
+            Finnish Sauna 170–190°F for 15–20 min
+            <small>OR Infrared Sauna 125–150°F for 20–40 min</small>
+            <small>OR Hot Bath 108°F for 20 min</small>
+          </td>
+          <td style="color:var(--muted)">Elevates core temperature, induces heat shock proteins, upregulates BDNF by up to 66%</td>
+        </tr>
+        <tr>
+          <td style="color:var(--blue)">❄️ Hypothermic</td>
+          <td>
+            Cold Plunge 40–60°F for 2–5 min
+            <small>Beginners: 50–59°F for 30–60 seconds</small>
+          </td>
+          <td style="color:var(--muted)">Triggers cold shock response, spikes dopamine and norepinephrine, induces vasoconstriction to flush metabolic waste</td>
+        </tr>
+        <tr>
+          <td style="color:var(--green)">🌿 Integration</td>
+          <td>Ambient rest at room temperature for 5–10 min</td>
+          <td style="color:var(--muted)">Vascular dilation, heart rate normalization, parasympathetic nervous system rebound</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="info" style="background:var(--amber-bg);border-color:var(--amber);margin-bottom:28px">
+    <h4 style="color:#78350f">Protocol Execution</h4>
+    <p>Repeat the Hot → Cold → Rest cycle <strong>3–5 times per session</strong> to achieve the full catecholamine flooding effect. Do not skip the integration phase — the parasympathetic rebound is where the neurological integration occurs.</p>
+  </div>
+
+  <h3 style="font-size:17px;font-weight:700;margin-bottom:8px">Neurobics: Induced Novelty</h3>
+  <p style="font-size:13.5px;color:var(--muted);margin-bottom:18px;max-width:660px">Targeted exercises that force the brain to operate outside automated parameters, demanding higher metabolic engagement and stimulating dendritic branching. Popularized by neurobiologist Dr. Lawrence C. Katz.</p>
+
+  <div class="grid-3">
+    <div class="card">
+      <div style="font-size:22px;margin-bottom:10px">✋</div>
+      <h4 style="font-size:14px;font-weight:700;margin-bottom:7px">Non-Dominant Motor Control</h4>
+      <p style="font-size:13px;color:var(--muted)">Brush teeth, eat meals, or use a mouse with your non-dominant hand. Forces the motor cortex to abandon automated pathways and engage in conscious motor planning, stimulating widespread cortical activation.</p>
+    </div>
+    <div class="card">
+      <div style="font-size:22px;margin-bottom:10px">👁️</div>
+      <h4 style="font-size:14px;font-weight:700;margin-bottom:7px">Sensory Disruption Tasks</h4>
+      <p style="font-size:13px;color:var(--muted)">Navigate a familiar room with eyes closed. Identify objects by touch or smell only. Recruits somatosensory and spatial-mapping networks normally bypassed entirely by visual dominance.</p>
+    </div>
+    <div class="card">
+      <div style="font-size:22px;margin-bottom:10px">🎸</div>
+      <h4 style="font-size:14px;font-weight:700;margin-bottom:7px">Complex Skill Acquisition</h4>
+      <p style="font-size:13px;color:var(--muted)">Learn an instrument, juggle, or acquire a new language. Links auditory, motor, and cognitive centers in novel configurations, building dense interconnected neural webs that increase overall cognitive reserve.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ▸ DIET & METABOLISM ───────────────────────────────────────────── -->
+<section class="section" id="diet">
+  <div class="sec-head">
+    <div class="sec-icon" style="background:var(--green-bg)">🥑</div>
+    <div class="sec-title">
+      <h2 style="color:#064e3b">Diet &amp; Metabolic Optimization</h2>
+      <p>Shifting the brain's biochemical environment to directly maximize the physiological limits of neuroplasticity.</p>
+    </div>
+  </div>
+
+  <!-- Ketosis -->
+  <div class="card" style="margin-bottom:18px">
+    <div class="card-head">
+      <span class="badge" style="background:var(--green-bg);color:var(--green)">Core Mechanism</span>
+      <span class="card-title">The G-to-K Switch: Glucose → Ketones (BHB)</span>
+    </div>
+    <p style="font-size:13.5px;color:var(--muted);margin-bottom:18px">When glucose is depleted via fasting, carb restriction, or high-intensity exercise, the liver produces <strong>Beta-Hydroxybutyrate (BHB)</strong> — an extraordinary neuroplasticity signaling molecule that crosses the blood-brain barrier. Trigger via: intermittent fasting (16–18h), ketogenic diet, or back-to-back HIIT sessions.</p>
+    <div class="grid-3">
+      <div style="background:var(--green-bg);border-radius:var(--r-sm);padding:14px">
+        <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--green);margin-bottom:6px">BDNF Enhancement</div>
+        <p style="font-size:12.5px;color:var(--muted)">BHB directly upregulates BDNF — the master regulator of Long-Term Potentiation, memory consolidation, and synaptic strengthening.</p>
+      </div>
+      <div style="background:var(--green-bg);border-radius:var(--r-sm);padding:14px">
+        <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--green);margin-bottom:6px">GABA Upregulation</div>
+        <p style="font-size:12.5px;color:var(--muted)">Ketones upregulate GABA (the brain's primary inhibitory transmitter), activating neuroprotective transcription factors CREB and NF-κB.</p>
+      </div>
+      <div style="background:var(--green-bg);border-radius:var(--r-sm);padding:14px">
+        <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--green);margin-bottom:6px">Anti-Inflammatory</div>
+        <p style="font-size:12.5px;color:var(--muted)">BHB inhibits the NLRP3 inflammasome, directly suppressing neuroinflammation that drives depressive and cognitively rigid states.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-head">
+        <span class="badge" style="background:var(--green-bg);color:var(--green)">Exercise</span>
+        <span class="card-title">HIIT for BDNF</span>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:12px">A 6-minute bout of High-Intensity Interval Training elevates circulating BDNF levels <strong>4–5× higher</strong> than low-intensity steady-state cardio or fasting alone. HIIT specifically boosts hippocampal neurogenesis and normalizes hippocampus–DMN functional connectivity — critical for sustaining cognitive reset gains over time.</p>
+      <p style="font-size:13px;color:var(--muted)">Combine fasting with HIIT for compounding synergistic effect. Follow with deep recovery (sleep, REST) to allow mitochondrial biogenesis.</p>
+      <div class="chips">
+        <span class="chip" style="background:var(--green-bg);color:#065f46">Sprint Intervals</span>
+        <span class="chip" style="background:var(--green-bg);color:#065f46">Kettlebell Circuits</span>
+        <span class="chip" style="background:var(--green-bg);color:#065f46">Jump Rope</span>
+        <span class="chip" style="background:var(--green-bg);color:#065f46">Rowing Sprints</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head">
+        <span class="badge" style="background:var(--green-bg);color:var(--green)">Diet</span>
+        <span class="card-title">Neuro-Protective Foods</span>
+      </div>
+      <div style="font-size:13px;color:var(--muted);display:flex;flex-direction:column;gap:10px">
+        <div>
+          <span style="font-weight:700;color:var(--green)">✓ Emphasize (MIND Diet Framework):</span>
+          <span> Green leafy vegetables, deeply pigmented berries, nuts, high-quality omega-3 fatty acids, olive oil (directly elevates hippocampal BDNF in vivo)</span>
+        </div>
+        <div>
+          <span style="font-weight:700;color:var(--red)">✗ Minimize:</span>
+          <span> Refined sugars, processed carbohydrates, saturated fats, and alcohol — all reliably downregulate BDNF and compromise blood-brain barrier integrity</span>
+        </div>
+        <div>
+          <span style="font-weight:700;color:var(--green)">✓ Non-negotiables:</span>
+          <span> 7–9 hours sleep per night. Minimize environmental toxin exposure. These are prerequisites for any metabolic catalyst to function.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ▸ SUPPLEMENTS ────────────────────────────────────────────────── -->
+<section class="section alt" id="supplements" style="background:#f0fdf9">
+  <div class="sec-head">
+    <div class="sec-icon" style="background:var(--green-bg)">🌿</div>
+    <div class="sec-title">
+      <h2 style="color:#064e3b">Supplement Stack</h2>
+      <p>Legally available nutraceuticals with robust clinical evidence for neurological repair, network plasticity, and BDNF/NGF upregulation. Efficacy depends on a supportive metabolic environment.</p>
+    </div>
+  </div>
+
+  <div class="tbl-scroll tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Compound</th>
+          <th>Mechanism</th>
+          <th>Dosage</th>
+          <th>Key Clinical Effect</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>🍄 Lion's Mane<small>Hericium erinaceus</small></td>
+          <td style="color:var(--muted)">Stimulates Nerve Growth Factor (NGF) synthesis via hericenones (fruiting body) and erinacines (mycelium). NGF activates TrkA receptors for neuron repair and survival.</td>
+          <td style="color:var(--muted)"><strong>1.0–3.2g daily</strong><small>e.g. 250mg TID high-yield extract</small></td>
+          <td style="color:var(--muted)">Clinically proven improvements in mild cognitive impairment, depression, and anxiety. Restores dopamine and noradrenaline depleted by chronic stress.</td>
+        </tr>
+        <tr>
+          <td>🌿 Bacopa Monnieri<small>Brahmi — fat-soluble, take with food</small></td>
+          <td style="color:var(--muted)">Upregulates BDNF; enhances synaptic signaling molecules required for synaptogenesis and Long-Term Potentiation (LTP).</td>
+          <td style="color:var(--muted)"><strong>300–600mg daily</strong><small>Standardized to 24–55% bacosides. Must be taken with dietary fat for absorption.</small></td>
+          <td style="color:var(--muted)">Improves spatial and logical memory, reduces distractibility over 12 weeks. Neuroimaging shows increased white matter diffusivity and gray matter dendritic branching.</td>
+        </tr>
+        <tr>
+          <td>🧲 Magnesium L-Threonate<small>MgT — crosses blood-brain barrier</small></td>
+          <td style="color:var(--muted)">Uniquely elevates cerebrospinal fluid magnesium (standard forms like citrate or oxide cannot). Activates NMDA receptors to preserve and increase presynaptic terminal density in the hippocampus.</td>
+          <td style="color:var(--muted)"><strong>1.5–2g total weight</strong><small>Follow product elemental Mg guidelines. Best taken in the evening.</small></td>
+          <td style="color:var(--muted)">Human trials confirm improved working memory, overall cognitive ability, and sleep architecture. Reverses age-related synaptic loss.</td>
+        </tr>
+        <tr>
+          <td>🌙 Ashwagandha<small>Withania somnifera — KSM-66 or Sensoril preferred</small></td>
+          <td style="color:var(--muted)">Withanolides modulate the HPA axis, dramatically reduce cortisol, and balance GABA/glutamate neurotransmission to prevent excitotoxicity.</td>
+          <td style="color:var(--muted)"><strong>Per extract concentration</strong><small>KSM-66: typically 600mg/day. Sensoril: typically 125–250mg/day.</small></td>
+          <td style="color:var(--muted)">Chronic cortisol prunes hippocampal dendrites. Ashwagandha suppresses cortisol, prevents dendritic loss, and upregulates BDNF to promote new dendritic spine growth.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ▸ AUDIO ENTRAINMENT ───────────────────────────────────────────── -->
+<section class="section" id="audio">
+  <div class="sec-head">
+    <div class="sec-icon" style="background:var(--purple-bg)">🎧</div>
+    <div class="sec-title">
+      <h2 style="color:#4c1d95">Audio Entrainment</h2>
+      <p>Neural entrainment amplifies somatic protocols — not cognitive work sessions. During breathwork, cortical neurons phase-lock to rhythmic audio, extending the ego-softened state.</p>
+    </div>
+  </div>
+
+  <div class="info" style="background:var(--purple-bg);border-color:var(--purple);margin-bottom:22px">
+    <h4 style="color:#4c1d95">Why It Works During Breathwork (Not During Work)</h4>
+    <p>During cognitive tasks, the Executive Control Network dominates and filters rhythmic audio as background noise. During breathwork and meditation, you are explicitly downregulating Beta waves — so rhythmic audio acts as a physical pacemaker, forcing neural firing to match the sound rhythm. It attacks the DMN from two directions simultaneously: <strong>biochemically via the lungs</strong> and <strong>electrically via the ears</strong>. Use the <strong>Theta range (4–8 Hz)</strong> during breathwork holds and meditation.</p>
+  </div>
+
+  <div class="grid-2">
+    <div class="tool-card">
+      <h4>NSDR.co</h4>
+      <div class="tool-url">nsdr.co</div>
+      <p>Zero-account web tool. Select an organic soundscape (rain, space ambience), enable the Binaural Beats overlay, and slide the selector to the <strong>Theta range (4–8 Hz)</strong> for breathwork holds and meditation sessions.</p>
+    </div>
+    <div class="tool-card">
+      <h4>myNoise.net</h4>
+      <div class="tool-url">mynoise.net → Binaural Beats Generator</div>
+      <p>Gold standard for customization. Features 10 color-coded frequency sliders for sculpting carrier frequencies. If a tone feels too piercing, lower specific sliders while preserving the entrainment frequency. No account required.</p>
+    </div>
+    <div class="tool-card">
+      <h4>Insight Timer</h4>
+      <div class="tool-url">insighttimer.com</div>
+      <p>Search for <strong>"Theta Waves for Breathwork"</strong> or <strong>"Binaural Beats Meditation."</strong> Unlocks thousands of free, long-form ambient soundscapes engineered by neuro-acoustic musicians specifically for deep somatic practices.</p>
+    </div>
+    <div class="tool-card">
+      <h4>YouTube — Isochronic Tones</h4>
+      <div class="tool-url">youtube.com → search "6Hz Theta Isochronic Tones"</div>
+      <p>Ideal for room speakers where headphones are impractical. Unlike binaural beats (which require separate left/right signals), isochronic tones use distinct single-tone pulses — producing a more intense cortical response and serving as an excellent breathing cycle metronome.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ▸ SUMMARY ─────────────────────────────────────────────────────── -->
+<section class="summary-section" id="summary">
+  <div class="summary-tag">The Complete System</div>
+  <h2>Three Pillars of Neuroplastic Change</h2>
+  <p>All three pillars must be targeted simultaneously for a fundamental cognitive reset. Individually, each has measurable effect. Together, they are transformative.</p>
+
+  <div class="pillar-grid">
+    <div class="pillar-card" style="background:rgba(109,40,217,.1);border:1px solid rgba(109,40,217,.2)">
+      <div class="pillar-n" style="color:#7c3aed">I</div>
+      <h3 style="color:#c4b5fd">Biochemical Optimization</h3>
+      <ul class="pillar-list">
+        <li style="color:#94a3b8"><span class="pe">⚗️</span> Intermittent fasting + HIIT to trigger the G-to-K switch</li>
+        <li style="color:#94a3b8"><span class="pe">🍄</span> Lion's Mane daily for NGF synthesis</li>
+        <li style="color:#94a3b8"><span class="pe">🌿</span> Bacopa for LTP and white matter density</li>
+        <li style="color:#94a3b8"><span class="pe">🧲</span> Magnesium L-Threonate for synaptic density and sleep</li>
+        <li style="color:#94a3b8"><span class="pe">🌙</span> Ashwagandha to suppress cortisol and protect dendrites</li>
+        <li style="color:#94a3b8"><span class="pe">🥑</span> MIND diet framework + 7–9h sleep as non-negotiables</li>
+      </ul>
+    </div>
+
+    <div class="pillar-card" style="background:rgba(13,148,136,.1);border:1px solid rgba(13,148,136,.2)">
+      <div class="pillar-n" style="color:#0d9488">II</div>
+      <h3 style="color:#5eead4">DMN Dismantling</h3>
+      <ul class="pillar-list">
+        <li style="color:#94a3b8"><span class="pe">🌑</span> Flotation or Chamber-REST for sensory deprivation</li>
+        <li style="color:#94a3b8"><span class="pe">🔥</span> Thermal contrast 3–5 cycles for catecholamine flooding</li>
+        <li style="color:#94a3b8"><span class="pe">💨</span> Wim Hof breathwork to alter blood pH and cortical state</li>
+        <li style="color:#94a3b8"><span class="pe">☀️</span> Morning activation (Somatic Flush or Awe Awakening)</li>
+        <li style="color:#94a3b8"><span class="pe">🌙</span> Evening integration (Metta or Witness Meditation)</li>
+        <li style="color:#94a3b8"><span class="pe">🎧</span> Theta-range audio entrainment during all somatic practices</li>
+      </ul>
+    </div>
+
+    <div class="pillar-card" style="background:rgba(217,119,6,.1);border:1px solid rgba(217,119,6,.2)">
+      <div class="pillar-n" style="color:#d97706">III</div>
+      <h3 style="color:#fcd34d">Active Reprogramming</h3>
+      <ul class="pillar-list">
+        <li style="color:#94a3b8"><span class="pe">⚡</span> 3-Second Pattern Interrupt in the 90–200ms window</li>
+        <li style="color:#94a3b8"><span class="pe">🔄</span> DBT Opposite Action during emotional dysregulation</li>
+        <li style="color:#94a3b8"><span class="pe">🧩</span> CBT cognitive defusion and reappraisal for rumination</li>
+        <li style="color:#94a3b8"><span class="pe">🪞</span> Mirror Clap for acute negative loop termination</li>
+        <li style="color:#94a3b8"><span class="pe">⏰</span> Theta windows (waking/sleep) for subconscious embedding</li>
+        <li style="color:#94a3b8"><span class="pe">✋</span> Daily Neurobics to prevent cognitive entrenchment</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="summary-note">
+    <p>The physiological interventions in Pillars I &amp; II create the <strong>biological window</strong> of neuroplasticity. The cognitive techniques in Pillar III are what you <strong>write into that window</strong>. Without active reprogramming, the window closes without a new program inscribed. Without the window, reprogramming meets rigid neural resistance. Both dimensions are necessary — neither is sufficient alone.</p>
+  </div>
+</section>
+
+</main>
+
+<script>
+  // Highlight active sidebar link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const links    = document.querySelectorAll('.sb-link');
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = document.querySelector(`.sb-link[href="#${e.target.id}"]`);
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { threshold: 0.25, rootMargin: '-60px 0px -40% 0px' });
+
+  sections.forEach(s => obs.observe(s));
+</script>
+
+</body>
+</html>
