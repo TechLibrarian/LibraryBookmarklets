@@ -1,7 +1,8 @@
 (function () {
-    // Prints a circulation receipt for only the items in the current
-    // "Check Out Results" table (not every item on the patron account).
-    // Designed for Booksys / Atriuum DoLookup checkout pages.
+    // Downloads a .rcpt circulation receipt for only the items in the
+    // current "Check Out Results" table (not every item on the patron
+    // account). Matches Booksys / Atriuum slip-printer receipt format so
+    // Chrome can auto-open the .rcpt the same way as the built-in button.
 
     function text(el) {
         return el ? el.textContent.replace(/\s+/g, ' ').trim() : '';
@@ -161,21 +162,19 @@
             '</HTML>\n';
     }
 
-    function printReceipt(html) {
-        var w = window.open('', '_blank', 'noopener,noreferrer,width=480,height=640');
-        if (!w) {
-            alert('Popup blocked. Allow popups for this site to print the receipt.');
-            return;
-        }
-        w.document.open();
-        w.document.write(html);
-        w.document.close();
-        w.focus();
+    function downloadReceipt(html) {
+        var blob = new Blob([html], { type: 'text/html' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'PatronReceipt.rcpt';
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        a.click();
         setTimeout(function () {
-            try {
-                w.print();
-            } catch (e) {}
-        }, 250);
+            a.remove();
+            URL.revokeObjectURL(url);
+        }, 1000);
     }
 
     var items = getCheckoutItems();
@@ -186,5 +185,5 @@
 
     var reportClass = getPatronReportClass();
     var html = buildReceiptHtml(items, reportClass, new Date());
-    printReceipt(html);
+    downloadReceipt(html);
 })();
