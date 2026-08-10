@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mock Alma — Batch Update Items</title>
+  <style>
+    body { font-family: -apple-system, Segoe UI, sans-serif; margin: 0; background: #f3f4f6; color: #111827; }
+    main { max-width: 640px; margin: 0 auto; padding: 24px; }
+    fieldset { background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 16px 20px; }
+    legend { font-weight: 600; }
+    .row { display: flex; align-items: center; margin: 10px 0; }
+    .row label { width: 220px; font-size: 14px; color: #374151; }
+    .row input[type=text], .row select { flex: 1; padding: 6px 8px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 14px; }
+    p.muted { color: #6b7280; font-size: 14px; }
+    a { color: #2563eb; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Mock Alma — Batch Update Items</h1>
+    <p class="muted">Mirrors the Alma "Change Physical Items" job fields the New&rarr;Old
+      bookmarklet drives. Click <strong>New&rarr;Old Menu</strong> above and pick an item type.
+      <a href="index.html">&larr; Back to harness</a></p>
+
+    <fieldset>
+      <legend>Change physical items</legend>
+      <div class="row">
+        <label for="ChangeCircType">Change circulation type</label>
+        <input id="ChangeCircType" type="checkbox" />
+      </div>
+      <div class="row">
+        <label for="CircTypeCode">Circulation type</label>
+        <select id="CircTypeCode"><option value="">—</option></select>
+      </div>
+      <div class="row">
+        <label for="ChangeSublocation">Change permanent location</label>
+        <input id="ChangeSublocation" type="checkbox" />
+      </div>
+      <div class="row">
+        <label for="SublocationCode">Permanent physical location</label>
+        <select id="SublocationCode"><option value="">—</option></select>
+      </div>
+      <div class="row">
+        <label for="ChangeOtherField">Change other field</label>
+        <input id="ChangeOtherField" type="checkbox" />
+      </div>
+      <div class="row">
+        <label for="OtherField">Other field</label>
+        <select id="OtherField">
+          <option value="">—</option>
+          <option value="CallNumberPrefix">Call number prefix</option>
+        </select>
+      </div>
+      <div class="row">
+        <label for="ValueOtherField">Other field value</label>
+        <input id="ValueOtherField" type="text" />
+      </div>
+    </fieldset>
+  </main>
+
+  <script src="runner.js"></script>
+  <script>
+    populateSelectsFromSource('NewToOldMenu.js', {
+      CircTypeCode: ['circType'],
+      SublocationCode: ['physicalLocation']
+    }).then(function () {
+      mountBookmarkletBar([
+        { label: 'New→Old Menu', file: 'NewToOldMenu.js' }
+      ]);
+    });
+  </script>
+</body>
+</html>

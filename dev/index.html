@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Library Bookmarklets — Dev Harness</title>
+  <style>
+    body { font-family: -apple-system, Segoe UI, sans-serif; margin: 0; background: #f3f4f6; color: #111827; }
+    main { max-width: 820px; margin: 0 auto; padding: 24px; }
+    h1 { margin-top: 8px; }
+    .card { background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 16px 20px; margin: 16px 0; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+    .card h2 { margin: 0 0 8px; font-size: 18px; }
+    a.button { display: inline-block; padding: 8px 14px; background: #2563eb; color: #fff; border-radius: 6px; text-decoration: none; font-size: 14px; }
+    code { background: #eef2ff; padding: 1px 5px; border-radius: 4px; }
+    .muted { color: #6b7280; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Library Bookmarklets — Dev Harness</h1>
+    <p class="muted">
+      These bookmarklets normally run as <code>javascript:</code> links against live library
+      web apps. This local harness mocks the relevant pages so each script can be exercised in a
+      browser during development. Use the blue toolbar at the top to run a bookmarklet against the
+      current page.
+    </p>
+
+    <div class="card">
+      <h2>Calculator</h2>
+      <p>A floating calculator overlay that works on <em>any</em> page. Click
+        <strong>Calculator</strong> in the toolbar above to launch it here, then type a
+        calculation.</p>
+      <p class="muted">Source: <code>calculator.js</code></p>
+    </div>
+
+    <div class="card">
+      <h2>Alma cataloging menus</h2>
+      <p>The main cataloging menu, the "repeat last settings" helper, and the batch
+        "New &rarr; Old" updater. Open the mock Alma pages to try them:</p>
+      <p>
+        <a class="button" href="alma-cataloging.html">Mock cataloging record page</a>
+        &nbsp;
+        <a class="button" href="alma-batch-update.html">Mock batch update page</a>
+      </p>
+      <p class="muted">Sources: <code>1BigCatMenu.js</code>, <code>2RepeatCataloging.js</code>,
+        <code>NewToOldMenu.js</code></p>
+    </div>
+
+    <div class="card">
+      <h2>SILO ILL helpers</h2>
+      <p class="muted">
+        <code>ILLCart.js</code> and <code>ILLSearch.js</code> target the live SILO ILL and
+        Booksys/Atriuum web apps (they read borrower/lender transaction markup and drive a
+        Select2 widget). They require those external sites and are not exercised by this local
+        harness.
+      </p>
+    </div>
+  </main>
+
+  <script src="runner.js"></script>
+  <script>
+    mountBookmarkletBar([
+      { label: 'Calculator', file: 'calculator.js' }
+    ]);
+  </script>
+</body>
+</html>

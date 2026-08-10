@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mock Alma — Cataloging Record</title>
+  <style>
+    body { font-family: -apple-system, Segoe UI, sans-serif; margin: 0; background: #f3f4f6; color: #111827; }
+    main { max-width: 640px; margin: 0 auto; padding: 24px; }
+    fieldset { background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 16px 20px; }
+    legend { font-weight: 600; }
+    .row { display: flex; align-items: center; margin: 10px 0; }
+    .row label { width: 200px; font-size: 14px; color: #374151; }
+    .row input, .row select { flex: 1; padding: 6px 8px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 14px; }
+    p.muted { color: #6b7280; font-size: 14px; }
+    a { color: #2563eb; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Mock Alma — Cataloging Record</h1>
+    <p class="muted">Fields below mirror the Alma physical-item editor IDs the bookmarklets look
+      for. Click <strong>Big Cat Menu</strong> above, pick a category, and watch the fields
+      populate. Then click <strong>Repeat Last</strong> to reapply the last saved choice.
+      <a href="index.html">&larr; Back to harness</a></p>
+
+    <fieldset>
+      <legend>Physical item — descriptive information</legend>
+      <div class="row">
+        <label for="bibliographicAuthor">Author</label>
+        <input id="bibliographicAuthor" type="text" value="Doe, Jane" />
+      </div>
+      <div class="row">
+        <label for="EffectiveCircTypeCode">Effective circulation type</label>
+        <select id="EffectiveCircTypeCode"><option value="">—</option></select>
+      </div>
+      <div class="row">
+        <label for="ReportClassCode">Report class (statistics note)</label>
+        <select id="ReportClassCode"><option value="">—</option></select>
+      </div>
+      <div class="row">
+        <label for="CallNumberPrefix">Call number prefix</label>
+        <input id="CallNumberPrefix" type="text" />
+      </div>
+      <div class="row">
+        <label for="CallNumberMiddle">Call number (middle)</label>
+        <input id="CallNumberMiddle" type="text" />
+      </div>
+      <div class="row">
+        <label for="SublocationCode">Permanent physical location</label>
+        <select id="SublocationCode"><option value="">—</option></select>
+      </div>
+    </fieldset>
+  </main>
+
+  <script src="runner.js"></script>
+  <script>
+    populateSelectsFromSource('1BigCatMenu.js', {
+      EffectiveCircTypeCode: ['circType'],
+      ReportClassCode: ['reportClass'],
+      SublocationCode: ['physicalLocation', 'value']
+    }).then(function () {
+      mountBookmarkletBar([
+        { label: 'Big Cat Menu', file: '1BigCatMenu.js' },
+        { label: 'Repeat Last', file: '2RepeatCataloging.js' }
+      ]);
+    });
+  </script>
+</body>
+</html>
