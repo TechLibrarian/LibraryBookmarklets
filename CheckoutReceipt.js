@@ -1,0 +1,190 @@
+(function () {
+    // Prints a circulation receipt for only the items in the current
+    // "Check Out Results" table (not every item on the patron account).
+    // Designed for Booksys / Atriuum DoLookup checkout pages.
+
+    function text(el) {
+        return el ? el.textContent.replace(/\s+/g, ' ').trim() : '';
+    }
+
+    function nb(n) {
+        return '&nbsp;'.repeat(n);
+    }
+
+    function parseTitleAuthor(raw) {
+        var m = raw.match(/^(.+?)\s*\/\s*(.+)$/);
+        if (m) {
+            return { title: m[1].trim(), author: m[2].trim() };
+        }
+        return { title: raw, author: '' };
+    }
+
+    function pad2(n) {
+        return (n < 10 ? '0' : '') + n;
+    }
+
+    function formatDate(d) {
+        return pad2(d.getMonth() + 1) + '/' + pad2(d.getDate()) + '/' + d.getFullYear();
+    }
+
+    function formatTime(d) {
+        var h = d.getHours();
+        var ampm = h >= 12 ? 'PM' : 'AM';
+        h = h % 12;
+        if (h === 0) h = 12;
+        return pad2(h) + ':' + pad2(d.getMinutes()) + ':' + pad2(d.getSeconds()) + ' ' + ampm;
+    }
+
+    function getPatronReportClass() {
+        var labels = document.querySelectorAll('.fieldName');
+        for (var i = 0; i < labels.length; i++) {
+            if (text(labels[i]).replace(/:$/, '') === 'Patron Report Class') {
+                var td = labels[i].parentElement;
+                if (!td) return '';
+                var clone = td.cloneNode(true);
+                var fn = clone.querySelector('.fieldName');
+                if (fn) fn.remove();
+                return text(clone);
+            }
+        }
+        return '';
+    }
+
+    function getCheckoutItems() {
+        var items = [];
+        var i = 0;
+        while (true) {
+            var barcodeEl = document.getElementById('ResultBarcode_' + i);
+            var titleEl = document.getElementById('ResultTitle_' + i);
+            var dueEl = document.getElementById('ResultDueDate_' + i);
+            if (!barcodeEl && !titleEl) break;
+
+            var barcode = text(barcodeEl);
+            var parsed = parseTitleAuthor(text(titleEl));
+            var due = text(dueEl);
+
+            if (barcode || parsed.title) {
+                items.push({
+                    barcode: barcode,
+                    title: parsed.title,
+                    author: parsed.author,
+                    due: due
+                });
+            }
+            i++;
+        }
+        return items;
+    }
+
+    function escapeHtml(s) {
+        return String(s)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
+    }
+
+    function buildItemHtml(item) {
+        var html = '<BR>' + nb(2) + escapeHtml(item.barcode) + nb(1) + escapeHtml(item.title) + nb(1) + '<BR>\n';
+        if (item.author) {
+            html += nb(2) + '(' + escapeHtml(item.author) + ')<BR>\n';
+        } else {
+            html += '\n';
+        }
+        html += '\n\n' + nb(2) + escapeHtml(item.due) + '<BR>\n';
+        return html;
+    }
+
+    function buildReceiptHtml(items, reportClass, when) {
+        var itemBlocks = items.map(buildItemHtml).join('\n\n\n\n\n');
+        return '<HTML>\n' +
+            '<HEAD>\n' +
+            '<!-- Gotcha\'s for the Epson Slip Printer:\n' +
+            '        - anything inside a SPAN tag will be colored red (if color is turned on) \n' +
+            '        - it CANNOT print black and red on the same line, if you try the red will not appear,\n' +
+            '          instead a 1 or 0 will show up where the red was supposed to start -->\n' +
+            '          \n' +
+            '<style>\n' +
+            'Font.Courier {font-family:"Courier New";font-size:8pt;}\n' +
+            '</style>\n' +
+            '<style type="text/css">\n' +
+            '.redtext {\n' +
+            '   \tcolor: red;\n' +
+            '\tfont-weight: bold;\n' +
+            '}\n' +
+            '</style>\n' +
+            '\n' +
+            '<TITLE>Patron Receipt</TITLE>\n' +
+            '</HEAD>\n' +
+            '<BODY BGCOLOR="#FFFFFF"  >\n' +
+            '\n' +
+            '\n' +
+            '<font class=Courier>\n' +
+            '<B>\n' +
+            '<BR>' + nb(6) + '<b>Waverly' + nb(1) + 'Public' + nb(1) + 'Library<BR>' +
+            nb(13) + '319-352-1223<BR>' +
+            nb(6) + 'www.waverlyia.com/library<BR><BR> <BR>--------------------------------------\n' +
+            '<BR><B>Receipt for Patron \n' +
+            '</B><BR>' + nb(2) + '<B>Patron Report Class:</B> ' + escapeHtml(reportClass) + '\n' +
+            '<BR>\n' +
+            '\n' +
+            '\n' +
+            '\n' +
+            '\n' +
+            '\n' +
+            '\n' +
+            '\n' +
+            '\n' +
+            '<BR><B>Items Out</B>\n' +
+            '\n' +
+            '\n' +
+            itemBlocks +
+            '\n' +
+            '\n' +
+            '\n' +
+            '\n' +
+            '\n' +
+            '\n' +
+            '\n' +
+            '<BR><BR>--------------------------------------\n' +
+            '<BR>' + formatDate(when) + nb(18) + formatTime(when) + '\n' +
+            '<BR><BR>' + nb(3) + 'Library' + nb(1) + 'Hours:' + nb(1) + 'Please' + nb(1) + 'visit' + nb(1) + 'our<BR>' +
+            nb(1) + 'website' + nb(1) + 'or' + nb(1) + 'call' + nb(1) + 'for' + nb(1) + 'latest' + nb(1) + 'updates.<BR>\n' +
+            '\n' +
+            '<BR><BR><BR><BR>\n' +
+            '\n' +
+            '\n' +
+            '</B>\n' +
+            '<BR>\n' +
+            '</font>\n' +
+            '</BODY>\n' +
+            '</HTML>\n';
+    }
+
+    function printReceipt(html) {
+        var w = window.open('', '_blank', 'noopener,noreferrer,width=480,height=640');
+        if (!w) {
+            alert('Popup blocked. Allow popups for this site to print the receipt.');
+            return;
+        }
+        w.document.open();
+        w.document.write(html);
+        w.document.close();
+        w.focus();
+        setTimeout(function () {
+            try {
+                w.print();
+            } catch (e) {}
+        }, 250);
+    }
+
+    var items = getCheckoutItems();
+    if (!items.length) {
+        alert('No current checkout results found.\n\nCheck out one or more items first, then run this bookmarklet again.');
+        return;
+    }
+
+    var reportClass = getPatronReportClass();
+    var html = buildReceiptHtml(items, reportClass, new Date());
+    printReceipt(html);
+})();
