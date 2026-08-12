@@ -13,7 +13,9 @@
       })
       .then(function (source) {
         // Executing the IIFE body mirrors a browser evaluating the
-        // `javascript:` bookmarklet URL on the active page.
+        // `javascript:` bookmarklet URL on the active page. Strip the
+        // scheme if this is the paste-ready bookmarklet file.
+        source = source.replace(/^\s*javascript:\s*/i, '');
         new Function(source)();
       })
       .catch(function (err) {
