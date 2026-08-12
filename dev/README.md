@@ -28,6 +28,7 @@ toolbar to execute a script against the current mock page.
 | `index.html` | Hub + the `calculator.js` overlay (works on any page) |
 | `alma-cataloging.html` | `1BigCatMenu.js`, `2RepeatCataloging.js` |
 | `alma-batch-update.html` | `NewToOldMenu.js` |
+| `atriuum-checkout.html` | `CheckoutReceipt.js` |
 
 `runner.js` fetches a bookmarklet's source and evaluates it on the page, exactly
 as clicking the installed bookmarklet would. The mock pages recreate the Alma

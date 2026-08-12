@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mock Atriuum — Check Out</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f3f4f6; color: #111827; }
+    main { max-width: 1100px; margin: 0 auto; padding: 24px; }
+    h1 { margin-top: 8px; }
+    h2 { font-size: 16px; margin: 20px 0 8px; }
+    .muted { color: #6b7280; font-size: 14px; }
+    a { color: #2563eb; }
+    table { border-collapse: collapse; width: 100%; background: #fff; }
+    td, th { border: 1px solid #d1d5db; padding: 6px 8px; font-size: 13px; text-align: left; }
+    .tableHeader { background: #e5e7eb; font-weight: 700; }
+    .fieldName { font-weight: 700; }
+    .panel { background: #fff; border: 1px solid #e5e7eb; border-radius: 10px; padding: 16px 20px; margin: 16px 0; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Mock Atriuum — Check Out</h1>
+    <p class="muted">
+      Recreates the Booksys/Atriuum checkout page the receipt bookmarklet reads.
+      Check Out Results holds only the latest scan; Items Out includes prior loans
+      plus this session’s checkouts (<code>fromCheckOut=yes</code>, row ids after
+      <code>g_itemsoutindex</code>).
+      <a href="index.html">&larr; Back to harness</a>
+    </p>
+
+    <div class="panel">
+      <table>
+        <tr>
+          <td><span class="fieldName">Patron Report Class:</span> Adult</td>
+          <td><span class="fieldName">Patron Name:</span> Jane Patron</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="panel">
+      <h2>Check Out Results</h2>
+      <p class="muted">Atriuum keeps only the most recent scan here.</p>
+      <table>
+        <tr>
+          <td class="tableHeader">Barcode</td>
+          <td class="tableHeader">Title</td>
+          <td class="tableHeader">Due Date</td>
+        </tr>
+        <tr>
+          <td id="ResultBarcode_0">30001009999999</td>
+          <td id="ResultTitle_0">Cricut Explore</td>
+          <td id="ResultDueDate_0">09/02/2026</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="panel">
+      <h2>Items Currently Out</h2>
+      <div id="tableData">
+        <table>
+          <tr>
+            <td class="tableHeader">Title</td>
+            <td class="tableHeader">Author</td>
+            <td class="tableHeader">Call Number</td>
+            <td class="tableHeader">Barcode</td>
+            <td class="tableHeader">Due Date</td>
+          </tr>
+          <tr id="itemsoutrow_1">
+            <td><a href="ReviewItems?holdingID=10001">The Midnight Library / Haig, Matt</a></td>
+            <td>Haig, Matt</td>
+            <td>FIC HAIG</td>
+            <td>30001001111111</td>
+            <td>07/15/2026</td>
+          </tr>
+          <tr id="itemsoutrow_2">
+            <td><a href="ReviewItems?holdingID=10002">Educated / Westover, Tara</a></td>
+            <td>Westover, Tara</td>
+            <td>B WESTOVER</td>
+            <td>30001002222222</td>
+            <td>07/15/2026</td>
+          </tr>
+          <tr id="itemsoutrow_3">
+            <td><a href="ReviewItems?holdingID=10003">Project Hail Mary / Weir, Andy</a></td>
+            <td>Weir, Andy</td>
+            <td>FIC WEIR</td>
+            <td>30001003333333</td>
+            <td>07/22/2026</td>
+          </tr>
+          <tr id="itemsoutrow_4">
+            <td><a href="ReviewItems?holdingID=10004">Braiding Sweetgrass / Kimmerer, Robin Wall</a></td>
+            <td>Kimmerer, Robin Wall</td>
+            <td>577 KIMMERER</td>
+            <td>30001004444444</td>
+            <td>07/22/2026</td>
+          </tr>
+          <tr id="itemsoutrow_5">
+            <td><a href="ReviewItems?holdingID=10005">Lessons in Chemistry / Garmus, Bonnie</a></td>
+            <td>Garmus, Bonnie</td>
+            <td>FIC GARMUS</td>
+            <td>30001005555555</td>
+            <td>08/01/2026</td>
+          </tr>
+          <tr id="itemsoutrow_6">
+            <td><a href="ReviewItems?holdingID=10006">Atomic Habits / Clear, James</a></td>
+            <td>Clear, James</td>
+            <td>158.1 CLEAR</td>
+            <td>30001006666666</td>
+            <td>08/01/2026</td>
+          </tr>
+          <tr id="itemsoutrow_7">
+            <td><a href="ReviewItems?holdingID=11218&amp;&amp;fromCheckOut=yes">The Thursday Murder Club / Osman, Richard</a></td>
+            <td>Osman, Richard</td>
+            <td>FIC OSMAN</td>
+            <td>30001007777777</td>
+            <td>09/02/2026</td>
+          </tr>
+          <tr id="itemsoutrow_8">
+            <td><a href="ReviewItems?holdingID=11219&amp;&amp;fromCheckOut=yes">Cricut Explore</a></td>
+            <td></td>
+            <td>LOT CRICUT</td>
+            <td>30001009999999</td>
+            <td>09/02/2026</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    var g_itemsoutindex = 6;
+  </script>
+  <script src="runner.js"></script>
+  <script>
+    mountBookmarkletBar([
+      { label: 'Checkout Receipt', file: 'CheckoutReceipt.js' }
+    ]);
+  </script>
+</body>
+</html>
