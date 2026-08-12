@@ -1,4 +1,7 @@
 (function () {
+    // Readable source. To install in Chrome, copy the contents of
+    // CheckoutReceipt.bookmarklet.js into a bookmark's URL field.
+    //
     // Downloads a .rcpt circulation receipt for items checked out during
     // the current session (not every item already on the patron account).
     // Check Out Results only holds the latest scan, so session items are
@@ -102,8 +105,12 @@
         return m ? parseInt(m[1], 10) : null;
     }
 
+    function tagName(el) {
+        return el && el.tagName ? el.tagName.toUpperCase() : '';
+    }
+
     function closestRow(el) {
-        while (el && el.tagName !== 'TR') el = el.parentElement;
+        while (el && tagName(el) !== 'TR') el = el.parentElement;
         return el;
     }
 
@@ -124,7 +131,7 @@
         var seen = [];
 
         function add(row) {
-            if (!row || row.tagName !== 'TR') return;
+            if (!row || tagName(row) !== 'TR') return;
             for (var i = 0; i < seen.length; i++) {
                 if (seen[i] === row) return;
             }
@@ -177,7 +184,7 @@
 
     function getHeaderMap(row) {
         var table = row.parentElement;
-        while (table && table.tagName !== 'TABLE') table = table.parentElement;
+        while (table && tagName(table) !== 'TABLE') table = table.parentElement;
         if (!table) return {};
 
         var rows = table.querySelectorAll('tr');
@@ -393,13 +400,17 @@
         }, 1000);
     }
 
-    var items = getCheckoutItems();
-    if (!items.length) {
-        alert('No items from this checkout session were found.\n\nCheck out one or more items first, then run this bookmarklet again.');
-        return;
-    }
+    try {
+        var items = getCheckoutItems();
+        if (!items.length) {
+            alert('No items from this checkout session were found.\n\nCheck out one or more items first, then run this bookmarklet again.');
+            return;
+        }
 
-    var reportClass = getPatronReportClass();
-    var html = buildReceiptHtml(items, reportClass, new Date());
-    downloadReceipt(html);
+        var reportClass = getPatronReportClass();
+        var html = buildReceiptHtml(items, reportClass, new Date());
+        downloadReceipt(html);
+    } catch (err) {
+        alert('Checkout receipt failed:\n' + (err && err.message ? err.message : err));
+    }
 })();
