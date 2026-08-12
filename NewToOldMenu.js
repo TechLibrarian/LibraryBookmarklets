@@ -7,10 +7,10 @@
     
     // Data dictionary for all the "Old" item types
     const oldTypes = {
-        'Adult Biography': { circType: '1', prefix: 'Biography - ', physicalLocation: '156' },
-        'Adult Fiction': { circType: '1', prefix: 'Fiction - ', physicalLocation: '157' },
+        'Adult / LP Biography': { circType: '1', prefix: 'Biography - ', physicalLocation: '156' },
+        'Adult / LFH Fiction': { circType: '1', prefix: 'Fiction - ', physicalLocation: '157' },
         'Adult Graphic Novel': { circType: '1', prefix: 'Adult Graphic Novel - ', physicalLocation: '104' },
-        'Adult Non-Fiction': { circType: '1', prefix: 'Non-Fiction - ', physicalLocation: '136' },
+        'Adult / LP Non-Fiction': { circType: '1', prefix: 'Non-Fiction - ', physicalLocation: '136' },
         'DVD Documentary': { circType: '119', prefix: 'Documentary - ', physicalLocation: '163' },
         'DVD Movie': { circType: '104', prefix: 'DVD - ', physicalLocation: '102' },
         'Large Print Fiction': { circType: '1', prefix: 'Large Print - ', physicalLocation: '131' },
